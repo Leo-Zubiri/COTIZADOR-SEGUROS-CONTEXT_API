@@ -1,11 +1,10 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
 const CotizadorContext = createContext();
 
 
 // Provider - la fuente de los datos
 const CotizadorProvider = ({children}) => { 
-
 
     return (
         <CotizadorContext.Provider value={{}}>

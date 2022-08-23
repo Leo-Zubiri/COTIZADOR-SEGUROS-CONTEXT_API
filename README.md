@@ -19,49 +19,66 @@ Hace un arreglo de 20 elementos
 # Context
 Dentro del directorio context crear un CotizadorProvider.jsx:
 
-```JS
-import { createContext } from "react";
+---
 
-const CotizadorContext = createContext();
+# **Context API**
 
+## 1. Crear context y provider
 
-// Provider - la fuente de los datos
-const CotizadorProvider = ({children}) => { 
+El provider es un componente que puede proporcionar funciones, variables y state a los componentes hijos. El context es lo que identifica a distintas porciones unas de otras.
 
+```js
 
-    return (
-        <CotizadorContext.Provider value={{}}>
+import {createContext,useState} from 'react'
+
+const MiContext = createContext();
+
+const MiProvider = ({children}) => {
+
+  const numero = 10;
+  const miFn = () => {}
+  const [state,setState] = useState({datos:[],headers:{}});
+
+  return (
+        <CotizadorContext.Provider value={{
+          numero,miFn,state,setState
+        }}>
             {children}
         </CotizadorContext.Provider>
     )
 }
-
-export {
-    CotizadorProvider
-}
-
-export default CotizadorContext;
 ```
 
-**Desde App.jsx importar el provider**
-El provider rodea la aplicación a la cual provee el contexto
+## 2. Envolver a los componentes con el provider
+
+Se importa el provider y entre estas etiquetas se colocan los componentes que tendrán acceso al contexto.
 
 ```js
-import AppSeguro	 from "./components/AppSeguro"
+import App	 from "./components/App"
 
-import {CotizadorProvider} from './context/CotizadorProvider'
+import {MiProvider} from './context/MiProvider'
 
 function App() {
 
   return (
-    <CotizadorProvider>
-    <AppSeguro />
-    </CotizadorProvider>
+    <MiProvider>
+      <App  />
+    </MiProvider>
   )
 }
 
 export default App
-
 ```
 
 ![](documentation/2.png)
+
+## 3. Importar el contexto
+Desde los componentes envueltos por el provider para acceder al context.
+Para usar determinado context se utiliza el hook ```useContext();```
+
+```js
+import MiContext from '../context/MiContext'
+
+// Se obtienen las partes que se necesiten
+const {numero,miFn,state,setState} = useContext(MiContext);
+```
