@@ -82,3 +82,27 @@ import MiContext from '../context/MiContext'
 // Se obtienen las partes que se necesiten
 const {numero,miFn,state,setState} = useContext(MiContext);
 ```
+
+## 4. Simplificar lo anterior mediante Hook.
+
+```js
+import { useContext } from "react";
+
+import MiContext from "../context/MiProvider";
+
+const useMiContext = () => {
+    return useContext(MiContext);
+}
+
+export default useMiContext;
+```
+
+Ahora para acceder a las porciones del contexto desde los componentes:
+
+```JS
+import useMiContext from '../hooks/useCotizador'
+
+...
+
+const {numero,miFn,state,setState} = useMiContext();
+```
