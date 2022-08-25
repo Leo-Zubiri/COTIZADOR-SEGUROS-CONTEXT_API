@@ -106,3 +106,14 @@ import useMiContext from '../hooks/useCotizador'
 
 const {numero,miFn,state,setState} = useMiContext();
 ```
+
+---
+
+```js
+
+let datos = {
+  nombre: '',
+  apellido: 'Zubiri'
+}
+Object.values(datos).includes('') // Retorna true si algun valor coincide dentro del objeto
+```

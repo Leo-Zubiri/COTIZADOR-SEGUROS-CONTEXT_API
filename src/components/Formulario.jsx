@@ -6,12 +6,29 @@ import { Fragment } from 'react'
 
 import useCotizador from '../hooks/useCotizador'
 
+import Error from './Error'
+
 const Formulario = () => {
+
+    const {error,setError,datos,handleChangeDatos,cotizarSeguro} = useCotizador();
+
+    const handleSubmit = (e) => { 
+        e.preventDefault();
+
+        if(Object.values(datos).includes('')){
+            console.error('Error, campos obligatorios');
+            setError('Todos los campos son obligatorios')
+            return
+        }
+
+        setError('');
+        cotizarSeguro();
+    }
 
   return (
     <>
-
-        <form>
+        {error && <Error />}
+        <form onSubmit={handleSubmit}>
             <div className="my-5">
                 <label htmlFor="" className="block mb-3 font-bold text-gray-400 uppercase">
                     Marca
@@ -19,6 +36,8 @@ const Formulario = () => {
                 <select
                     name='marca'
                     className='w-full p-3 bg-white border border-gray-400'
+                    onChange={handleChangeDatos}
+                    value={datos.marca}
                 >
 
                     <option value=''> -- Selecciona marca -- </option>
@@ -35,8 +54,10 @@ const Formulario = () => {
                     Año
                 </label>
                 <select
-                    name='marca'
+                    name='year'
                     className='w-full p-3 bg-white border border-gray-400'
+                    onChange={handleChangeDatos}
+                    value={datos.year}
                 >
 
                     <option value=''> -- Selecciona Año -- </option>
@@ -63,6 +84,7 @@ const Formulario = () => {
                                     type='radio'
                                     name='plan'
                                     value={plan.id}
+                                    onChange={handleChangeDatos}
                                 />
                             </Fragment>
                         ))
