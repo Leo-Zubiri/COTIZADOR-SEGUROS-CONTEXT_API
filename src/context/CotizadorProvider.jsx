@@ -4,6 +4,9 @@ const CotizadorContext = createContext();
 
 import { useState } from "react";
 
+import { obtenerDiferenciaYear,calcularMarca,
+calcularPlan,formatearDinero } from "../helpers";
+
 // Provider - la fuente de los datos
 const CotizadorProvider = ({children}) => { 
 
@@ -14,13 +17,35 @@ const CotizadorProvider = ({children}) => {
     });
 
     const [error, setError] = useState('');
+    const [resultado, setResultado] = useState('');
 
     const handleChangeDatos = e => {
         setDatos({...datos, [e.target.name]: e.target.value  });
     }
 
     const cotizarSeguro = () => { 
-        console.log('Cotizando');
+        // Una base
+        let resultado = 2000;
+
+        // Obtener diferencia de años
+        const dif = obtenerDiferenciaYear(datos.year);
+
+        // Restar 3% cada año
+        resultado -= ((dif*3)*resultado)/100
+
+        // Americano 15%
+        // Europeo 30%
+        resultado *= calcularMarca(datos.marca);
+    
+        // Basico 20%
+        // Premium 50%
+        resultado *= calcularPlan(datos.plan);
+       
+        resultado = formatearDinero(resultado);
+        console.log(resultado)
+
+        setResultado(resultado);
+
     }
 
     return (
