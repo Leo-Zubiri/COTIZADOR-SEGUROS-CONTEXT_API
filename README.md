@@ -133,3 +133,26 @@ export function formatearDinero(cantidad){
     })
 }
 ```
+---
+
+**Para evitar el re-render de los componentes cuando no es necesario:**
+
+## useCallback, useMemo y useRef
+```js 
+import { useCallback,useMemo,useRef } from 'react';
+
+...
+
+// Solo alterará el resultado si una porcion del estado específico cambia
+const [resultado] = useCallback(funcion,[stateEspecifico])
+
+// Referencia directa a un componente en el DOM. useRef() is basically useState({current: initialValue })[0]
+// Para guardar un valor de referencia:
+const varRef = useRef(var);
+console.log(varRef.current);
+
+// Solo alterará el resultado si una porcion del estado específico cambia
+const [resultado] = useMemo(()=>{},[stateEspecifico])
+```
+
+>The useMemo and useCallback Hooks are similar. The main difference is that useMemo returns a memoized value and useCallback returns a memoized function.
