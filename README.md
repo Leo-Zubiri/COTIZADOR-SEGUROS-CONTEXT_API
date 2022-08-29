@@ -6,6 +6,7 @@
    
 ```npm i tailwindcss postcss autoprefixer```
 ```npx tailwindcss init -p```
+
   content: ['index.html','./src/**/*.jsx'],
 
 
