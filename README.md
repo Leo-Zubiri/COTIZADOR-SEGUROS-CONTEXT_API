@@ -1,11 +1,15 @@
-Links
+![](./documentation/3.png)
+![](./documentation/4.png)
 
 1. SET UP tailwind
-2. tailwind css
-npm i tailwindcss postcss autoprefixer
-npx tailwindcss init -p
+2. [tailwind css](https://github.com/Leo-Zubiri/React-TailwindCSS#readme)
+   
+```npm i tailwindcss postcss autoprefixer```
+```npx tailwindcss init -p```
   content: ['index.html','./src/**/*.jsx'],
 
+
+# Estructura del proyecto
 ![](documentation/1.png)
 
 # Date.getFullYear
