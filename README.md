@@ -127,7 +127,7 @@ Object.values(datos).includes('') // Retorna true si algun valor coincide dentro
 
 ## Decimales a mostrar **toFixed**
 Dos decimales: 
- ````miVar.toFixed(2)```
+ ```miVar.toFixed(2)```
 
 ## Formato de dinero
 ```js
